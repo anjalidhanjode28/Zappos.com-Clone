@@ -1,0 +1,34 @@
+.jarvis{
+    width: 90%;
+    margin: auto;
+    height: 570px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+   
+}
+.jarvis>div{
+    height: 100%;
+    width: 32%;
+    text-align: center;
+    cursor: pointer;
+}
+.jarvis img{
+    width: 100%;
+}
+.jarvis h2{
+    font-size: 20px;
+}
+.jarvis p{
+    font-size: 14.5px;
+}
+.jarvis p+p {
+    text-decoration: underline;
+    color: rgb(0, 57, 83);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 25px;
+}
+.jarvis>div:hover  p+p{
+    color: #1183d6;
+}
