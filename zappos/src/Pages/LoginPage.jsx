@@ -60,16 +60,16 @@ function LoginPage () {
     
     
       <Text fontWeight='bold'>Email</Text>
-      <Input placeholder='' size='sm' mb='10px' onChange={(event) => setEmaillog(event.target.value)}/>
+      <Input  type='email' placeholder='' size='sm' mb='10px' onChange={(event) => setEmaillog(event.target.value)}/>
       <Flex>
       <Text fontWeight='bold'>Password</Text> <Spacer />
       <Text >Forgot Password?</Text>
       </Flex>
-      <Input placeholder='' size='sm' mb='10px'  onChange={(event) => setPasswordlog(event.target.value)}/>
+      <Input type='password' placeholder='' size='sm' mb='10px'  onChange={(event) => setPasswordlog(event.target.value)}/>
       
       
      
-      <Button mt='20px' w='420px' mb='40px' colorScheme='blue' onClick={handleClick} type="submit">Sign In</Button>
+      <Button mt='20px' w='420px' mb='40px' colorScheme='blue' onClick={handleClick} type="submit">Log In</Button>
 
       <Text textAlign='center'>New to Zappos?</Text>
       <Button mt='10px' w='420px' mb='40px' colorScheme='blue' onClick={handleClick2} type="submit">Create your zappos Account</Button>

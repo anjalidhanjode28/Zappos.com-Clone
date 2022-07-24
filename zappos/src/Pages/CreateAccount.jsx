@@ -48,14 +48,14 @@ return (
      <Text fontSize='3xl' textAlign='center'>Create Account</Text>
      </Box>
       <Text fontWeight='bold'>Your Name</Text>
-      <Input placeholder='' size='sm' mb='10px' onChange={(event) => setName(event.target.value)} />
-      <Text fontWeight='bold'>Email</Text>
+      <Input type='email' placeholder='' size='sm' mb='10px' onChange={(event) => setName(event.target.value)} />
+      <Text fontWeight='bold' >Email</Text>
       <Input placeholder='' size='sm' mb='10px' onChange={(event) => setEmail(event.target.value)}/>
-      <Text fontWeight='bold'>Password</Text>
-      <Input placeholder='At least 6 Characters' size='sm' mb='10px' onChange={(event) => setPassword(event.target.value)}/>
+      <Text fontWeight='bold' >Password</Text>
+      <Input type='password' placeholder='At least 6 Characters' size='sm' mb='10px' onChange={(event) => setPassword(event.target.value)}/>
       <p>Password must be at least 6 characters</p>
       <Text fontWeight='bold'>Re-enter Password</Text>
-      <Input placeholder='' size='sm'  onChange={(event) => setCpassword(event.target.value)}/>
+      <Input type='password' placeholder='' size='sm'  onChange={(event) => setCpassword(event.target.value)}/>
       <Button mt='20px' w='420px' mb='40px' colorScheme='blue'  onClick={handleClick} type="submit">Create your Zappos Account</Button>
 
       <p style={{ fontSize: "12px" }}>
