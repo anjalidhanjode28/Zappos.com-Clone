@@ -1,9 +1,15 @@
 
 import { Box, Heading, Text, Button, Flex, Image} from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
+import style from "../Style/cart.module.css";
 
 function AddtoCart() {
-    const navigate = useNavigate();
+  const {cart,removeItem} = useContext(AppContext);
+  const navigate = useNavigate();
+   
+
     return (
         <>
         <Box mt='30px' mb='40px' m='auto'>
@@ -12,29 +18,32 @@ function AddtoCart() {
         <Flex gap='60px'>
         <Button onClick={()=>navigate("/create-account")} w='100px' colorScheme='blue' variant='outline'>Sign-In</Button>
         <Button onClick={()=>navigate("/")} colorScheme='blue' variant='outline'>Home Page</Button>
-        <Button  colorScheme='blue' variant='outline'>Brand Name</Button>
+        <Button  colorScheme='blue' variant='outline' onClick={()=>navigate("/sneaker")} >Brand Name</Button>
         <Button onClick={()=>navigate("/women")} colorScheme='blue' variant='outline'>Products</Button>
         <Button onClick={()=>navigate("/checkout")} colorScheme='blue' variant='outline'>Checkout</Button>
         </Flex>
         </Box>
 
-        <Box w='20%' m='auto' mt='50px'>
-          <Box  w='300px' boxShadow='rgba(100, 100, 111, 0.2) 0px 7px 29px 0px'>
+        <div className={style.box1}>
+       
+        {
+          cart.map((ele) => (
          
-          <Box p='10px'>
+        <div className={style.tops} key={ele.id}>
+            <div><img src={ele.imageurl} /></div>
+          <div>
+          <h1>{ele.desc}</h1>
+          <h2 >{ele.brand}</h2>
+          <p >${ele.price}</p>
+          </div>
+          <div className={style.btn}>
+             <Button  colorScheme='blue' variant='solid' onClick={() => removeItem(ele.id)}>Remove</Button>
+          </div>
+         </div> 
          
-          <Image src='https://m.media-amazon.com/images/I/71oq4d1UQ3L._AC_SR255,340_.jpg' />
-          </Box>
-          <Box mb='10px'>
-          <Text fontSize='lg' fontWeight='bold'>Short sleves Round Neck Tees</Text>
-          <Text fontSize='md' fontWeight='medium'>CeCe</Text>
-          <Text fontSize='md' fontWeight='medium'>$50</Text>
-          </Box>
-          <Button mb='10px' colorScheme='blue' variant='solid'>Remove</Button>
-          </Box>
-          
-        </Box>
-        
+          ))
+        }
+        </div>
         </Box>
         
         </>

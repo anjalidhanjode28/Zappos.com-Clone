@@ -1,5 +1,6 @@
 import { TriangleDownIcon ,Search2Icon} from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
 import {
     Flex,
     Spacer,
@@ -25,12 +26,14 @@ import { useDisclosure } from "@chakra-ui/react";
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react'
+import { useContext } from "react";
 
 
 
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { authState } = useContext(AppContext);
   
   const navigate = useNavigate();
  
@@ -69,7 +72,13 @@ function Navbar() {
        </Flex>
        </div>
 
-       <div className="nav3">
+       <div className="nav3" style={{
+         position:"sticky",
+         top: "0",
+         zIndex:200,
+         background:"white"
+
+       }}>
        <Flex w='90%' margin='auto' mt='20px' h='50px'>
        <Box boxSize='8rem'>
        <Image src='https://m.media-amazon.com/images/G/01/zappos/melody/zapposPBS._CB1509642213_.svg'  />
@@ -91,7 +100,7 @@ function Navbar() {
        </Flex>
        </div>
 
-       <div className="nav4">
+       <div className="nav4" >
        <Flex w='90%' m='auto' mt='20px' bg='#edf2f7' wrap='wrap'>
        <Box>
 
@@ -514,7 +523,7 @@ function Navbar() {
 
 
        <Box>
-       <Button onClick={onOpen } colorScheme='black' variant='link' pt='5px' mr='2px'>Sign In / Register</Button>
+       <Button onClick={onOpen } colorScheme='black' variant='link' pt='5px' mr='2px'>{authState.isAuth? "Logout" : "Sign In / Register" }</Button>
        <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose} w='800px' m='auto'>
         <ModalOverlay />
         <ModalContent>

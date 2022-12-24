@@ -2,8 +2,10 @@ import styles from "../Style/sneaker.module.css";
 import { Button , Box, Heading, Text} from "@chakra-ui/react"
 import { Footer } from "../Components/Footer";
 import Navbar from "../Routes/Navbar";
+import { AppContext } from "../Context/AppContext";
+import { useContext } from "react";
 
-const womenSneakers = [
+export const womenSneakers = [
     {
       "imageurl": "https://m.media-amazon.com/images/I/719oXoOFoML._AC_UL320_.jpg",
       "desc": "Damyuan Women's Walking Shoes Tennis Sneakers Casual Lace Up Lightweight Running Shoes",
@@ -143,6 +145,7 @@ const womenSneakers = [
 
 
 export const Sneaker = () => {
+  const {handleAdd2 } = useContext(AppContext)
     return (
       <>
       <Navbar />
@@ -165,7 +168,10 @@ export const Sneaker = () => {
                 <p className={styles.desc}>{data.desc}</p>
                 <p className={styles.brand}>{data.brand}</p>
                 <p className={styles.price}>${data.price}</p>
-                <Button colorScheme='teal' variant='solid' w='150px'h='40px' m='auto' mb='10px'>Add to card</Button>
+                <Button colorScheme='teal' variant='solid' w='150px'h='40px' 
+                m='auto' mb='10px'
+                onClick={() => handleAdd2(data.id)}
+                >Add to card</Button>
             </div> 
           
     

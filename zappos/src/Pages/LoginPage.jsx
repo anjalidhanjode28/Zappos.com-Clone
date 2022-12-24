@@ -1,43 +1,45 @@
 import { Text , Input, Box, Spacer,Flex, Button ,Image } from "@chakra-ui/react";
 import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { AppContext } from "../Context/AppContext";
 import CreateAccount from "./CreateAccount";
+import { useContext } from "react";
 
 
 function LoginPage () {
 
-    const [emaillog, setEmaillog] = useState("");
-    const [passwordlog, setPasswordlog] = useState("");
-    const [flag, setFlag] = useState(false);
-    const [home, setHome] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { loginUser, logoutUser } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    fetch("https://reqres.in/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.token) {
+          loginUser(res.token);
+          console.log(res);
+          alert("Login Successful")
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   
-    const navigate = useNavigate();
-  
-    const handleLogin = (e) => {
-      e.preventDefault();
-  
-      let userData = JSON.parse(localStorage.getItem("userData"));
-  
-      let email = userData.email;
-      let pass = userData.password;
-  
-      if (!emaillog || !passwordlog) {
-        setFlag(true);
-        console.log("empty");
-      } else if (!passwordlog !== pass || !emaillog !== email) {
-        setFlag(true);
-      } else {
-        setHome(!home);
-        setFlag(false);
-      }
-    };
-  
+   
     const handleClick = () => {
-      navigate("/");
-      alert("Login Successful")
-      
-    };
-    const handleClick2 = () => {
         navigate("/create-account");
         
       };
@@ -51,7 +53,7 @@ function LoginPage () {
      <Image w='100px' m='auto' src='https://m.media-amazon.com/images/G/01/zappos/melody/zapposPBS._CB1509642213_.svg' />
      </Box>
     
-     <form onSubmit={handleLogin}>
+     <form onSubmit={handleSubmit}>
      <Box border='1px solid black' p='20px' textAlign='left'>
      
      
@@ -60,19 +62,24 @@ function LoginPage () {
     
     
       <Text fontWeight='bold'>Email</Text>
-      <Input  type='email' placeholder='' size='sm' mb='10px' onChange={(event) => setEmaillog(event.target.value)}/>
+      <Input  type='email' placeholder='' size='sm' mb='10px'  value={email}
+      onChange={(e) => setEmail(e.target.value)}/>
       <Flex>
-      <Text fontWeight='bold'>Password</Text> <Spacer />
+      <Text fontWeight='bold'
+      >
+      Password</Text> <Spacer />
       <Text >Forgot Password?</Text>
       </Flex>
-      <Input type='password' placeholder='' size='sm' mb='10px'  onChange={(event) => setPasswordlog(event.target.value)}/>
+      <Input type='password' placeholder='' size='sm' mb='10px'  value={password} onChange={(e) => setPassword(e.target.value)} />
       
       
      
-      <Button mt='20px' w='420px' mb='40px' colorScheme='blue' onClick={handleClick} type="submit">Log In</Button>
+      <Button mt='20px' w='420px' mb='40px' colorScheme='blue' type="submit">Log In</Button>
 
       <Text textAlign='center'>New to Zappos?</Text>
-      <Button mt='10px' w='420px' mb='40px' colorScheme='blue' onClick={handleClick2} type="submit">Create your zappos Account</Button>
+      <Button mt='10px' w='420px' mb='40px' colorScheme='blue' type="submit"
+      onClick={handleClick}
+      >Create your zappos Account</Button>
      </Box>
    
      </form>

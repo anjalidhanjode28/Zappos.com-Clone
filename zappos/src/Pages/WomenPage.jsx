@@ -3,7 +3,9 @@ import { Button , Box, Heading, Text} from "@chakra-ui/react"
 import { Footer } from "../Components/Footer";
 import Navbar from "../Routes/Navbar";
 import { useState } from "react";
- const tops = [
+import { AppContext } from "../Context/AppContext";
+import { useContext } from "react";
+export const tops = [
     {
       imageurl:
         "https://m.media-amazon.com/images/I/71oq4d1UQ3L._AC_SR255,340_.jpg",
@@ -152,8 +154,12 @@ import { useState } from "react";
 
 
   export const WomenPage = () => {
- 
-    
+    // const [product,setProduct] = useState(tops)
+   
+    const {handleAdd} = useContext(AppContext)
+  
+
+  
 
 
    
@@ -179,11 +185,12 @@ import { useState } from "react";
                 <p className={styles.desc}>{data.desc}</p>
                 <p className={styles.brand}>{data.brand}</p>
                 <p className={styles.price}>${data.price}</p>
-                <Button  colorScheme='teal' variant='solid' w='150px'h='40px' m='auto' mb='10px'>Add to card</Button>
+                <Button  
+                colorScheme='teal' variant='solid'
+                 w='150px'h='40px' m='auto' mb='10px'
+                 onClick={() => handleAdd(data.id) }
+                 >Add to card</Button>
             </div> 
-          
-    
-            
         
             )
  

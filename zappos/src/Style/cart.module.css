@@ -1,0 +1,42 @@
+.box1 {
+    margin: auto;
+    width: 50%;
+    margin-top: 40px;
+    /* border: 1px solid red; */
+   
+}
+.tops {
+  margin: auto;
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+  justify-content: center;
+  /* border: 1px solid green; */
+  box-shadow: 1px 1px 8px gray;
+}
+.tops > div {
+    align-items: center;
+    width: 150px;
+    padding: 10px;
+}
+.tops > div > img {
+    width: 100px;
+    height: 100px;
+}
+.tops > div > h1 {
+    font-weight: bold;
+}
+.tops > div > h2 {
+    color: tomato;
+    font-weight: bold;
+}
+.tops > div > p {
+    color: blue;
+    font-weight: bold;
+}
+.btn {
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
